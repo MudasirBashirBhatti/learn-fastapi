@@ -23,3 +23,9 @@ source myenvironment/Scripts/activate
 # deactivate the virtual environment
 deactivate
 ```
+
+# 2. Install dependencies
+
+```bash
+uv add fastapi uvicorn
+```
