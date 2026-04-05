@@ -29,3 +29,9 @@ deactivate
 ```bash
 uv add fastapi uvicorn
 ```
+
+# 3. How to run the project using uv
+
+```bash
+uv run uvicorn main:app --reload
+```
