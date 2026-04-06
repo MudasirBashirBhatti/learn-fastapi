@@ -35,3 +35,9 @@ uv add fastapi uvicorn
 ```bash
 uv run uvicorn main:app --reload
 ```
+
+# 3. Run uvicorn instance
+
+```bash
+uv run uvicorn main:app --reload
+```
