@@ -19,16 +19,18 @@ class ProductService:
         return product
 
     def create_product(self, data: ProductCreate):
-        product = Product(**data.dict())
+        product = Product(**data.model_dump())
         return self.repo.add(product)
 
     def update_product_or_404(self, product_id: int, data: ProductCreate):
+        if not product_id:
+            raise HTTPException(status_code=400, detail="Product ID is required for update")
         product = self.repo.get_by_id(product_id)
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")
 
         # Update fields dynamically
-        for key, value in data.dict().items():
+        for key, value in data.model_dump().items():
             setattr(product, key, value)
         return self.repo.update(product)
 
