@@ -40,3 +40,6 @@ class ProductService:
             raise HTTPException(status_code=404, detail="Product not found")
         self.repo.delete(product)
         return product
+    
+    def use_params_request(self,name:str):
+        return {"message": f"Hdello, {name}!"}

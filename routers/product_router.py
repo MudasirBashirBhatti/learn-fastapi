@@ -16,6 +16,11 @@ def get_product_service(db: Session = Depends(get_db)) -> ProductService:
 def get_products(service: ProductService = Depends(get_product_service)):
     return service.get_all_products()
 
+
+@router.get("/sayhello")
+def greet(name:str,service:ProductService= Depends(get_product_service)):
+    return service.use_params_request(name)
+
 @router.get("/{product_id}", response_model=ProductSchema)
 def get_product(product_id: int = Path(...,title="Get product by ID",description="Get product data by its ID",example="P001",min_length=3, max_length=8), service: ProductService = Depends(get_product_service)):
     return service.get_product_or_404(product_id)
