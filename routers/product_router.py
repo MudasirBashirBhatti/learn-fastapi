@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends,Path
 from sqlalchemy.orm import Session
 from database import get_db
 from services.product_service import ProductService
@@ -17,7 +17,7 @@ def get_products(service: ProductService = Depends(get_product_service)):
     return service.get_all_products()
 
 @router.get("/{product_id}", response_model=ProductSchema)
-def get_product(product_id: int, service: ProductService = Depends(get_product_service)):
+def get_product(product_id: int = Path(...,title="Get product by ID",description="Get product data by its ID",example="P001",min_length=3, max_length=8), service: ProductService = Depends(get_product_service)):
     return service.get_product_or_404(product_id)
 
 @router.post("/", response_model=ProductSchema)
